@@ -28,7 +28,7 @@ How to build:
 1. Clone the repository
 1. Run `chmod +x buildkali.sh`
 1. Run the buildkali.sh script
-1. Connect with your favourite VNC client to localhost:5900 or with your browser to http://localhost:6800/vnc.html
+1. Connect with your favourite VNC client to localhost:5900 or with your browser to http://localhost:6080/vnc.html
 
 ### WARNING
 

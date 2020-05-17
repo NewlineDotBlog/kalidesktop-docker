@@ -19,13 +19,13 @@ sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount sour
 sleep 30
 
 echo 'How do you want to connect?'
-select CHOICE in vpn novpn none ; do
+select CHOICE in vnc novnc none ; do
 
   case $CHOICE in
-    vpn)
+    vnc)
 	(command -v xtigervncviewer &>/dev/null && xtigervncviewer 127.0.0.1:5900 -Fullscreen &>/dev/null & ) || (echo 'xtigervnc not found... Installing...'; sudo apt-get update &>/dev/null && sudo apt-get install tigervnc-viewer --show-progress | grep Progress && xtigervncviewer 127.0.0.1:5900 -Fullscreen &>/dev/null ) || echo 'Failed to install/run xtigervncviewer... Please point your favourite VNC viewer at localhost:5900' &
         ;;
-    novpn)
+    novnc)
 	echo 'Opening your default browser...'
 	xdg-open http://127.0.0.1:6080/vnc.html &
         ;;

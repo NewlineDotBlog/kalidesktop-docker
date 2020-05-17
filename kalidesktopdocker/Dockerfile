@@ -41,7 +41,7 @@ RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
 
 RUN echo
 
-CMD /root/post.sh &
+RUN /root/post.sh &
 
 CMD /root/startup.sh
 
