@@ -3,18 +3,19 @@
 echo 'Creating volume...'
 sudo docker volume create kalivol
 
+# Side not, we're using the 'whoami' command instead of leveraging the $HOME variable to ensure
+# we don't clash with any weird home directories in the kali machine
 USER=`whoami` # Cannot do this inline in a sudo command, will return root instead
 
-echo 'Building image, this might take a while...'
-sudo docker build \
-	-t kalidesktop \ # --mount source=kalivol,target=/ \
-	-v /home/$USER:/home/$USER \
-	kali2custom/
+# --mount source=kalivol,target=/ \
 
-unset $USER
+echo 'Building image, this might take a while...'
+sudo docker build -t kalidesktop kalidesktopdocker/
+
+unset $USER # We no longer need the variable
 
 echo 'Finished building! Running kali and waiting...'
-sudo docker run -d --network host --privileged --mount source=kalivol,target=/ kalidesktop # | grep Progress &
+sudo docker run -d --network host --privileged -v $HOME:/home/$USER kalidesktop # | grep Progress &
 sleep 30
 
 echo 'How do you want to connect?'
@@ -34,7 +35,7 @@ select CHOICE in vpn novpn none ; do
         ;;
     *)
   esac
-  break # break avoids endless loop -- second line to be executed always
+  break # break avoids endless loop
 done
 echo 'All done! Happy hacking!'
 
