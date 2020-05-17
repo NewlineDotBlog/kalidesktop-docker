@@ -23,6 +23,13 @@ Note the following design decisions when making changes or adding self made post
 * `/home/$USER` is the persistent home folder of the host machine.
 * `/opt/vol/` is a persistent programs and files. Should be used for weird installations and configurations. Separate volumes can be attached in `/opt/` as well.
 
+How to build:
+
+1. Clone the repository
+1. Run `chmod +x buildkali.sh`
+1. Run the buildkali.sh script
+1. Connect with your favourite VNC client to localhost:5900 or with your browser to http://localhost:6800/vnc.html
+
 ### WARNING
 
 As can be read above, the machine has full access to your home folder by default. Furthermore, the container runs with a lot of privileges by default.

@@ -1,6 +1,7 @@
 FROM kalilinux/kali-rolling
 ENV DISPLAY :1
 ADD startup.sh /root/startup.sh
+ADD post.sh /root/post.sh
 RUN chmod 0755 /root/startup.sh
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
@@ -39,6 +40,8 @@ RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
     cd /root
 
 RUN echo
+
+CMD /root/post.sh &
 
 CMD /root/startup.sh
 
