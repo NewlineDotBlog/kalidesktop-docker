@@ -17,6 +17,12 @@ This docker image was made to have the following features:
 * Full ports access for ease of use
 * Full docker access for docker in docker support
 
+Note the following design decisions when making changes or adding self made post scripts:
+
+* `/root/` is non persistent custom files and folders. These are meant only for the kali machine such as symbolic links etc.
+* `/home/$USER` is the persistent home folder of the host machine.
+* `/opt/` is a persistent programs and files. Should be used for weird installations and configurations.
+
 ### WARNING
 
 As can be read above, the machine has full access to your home folder by default. Furthermore, the container runs with a lot of privileges by default.
