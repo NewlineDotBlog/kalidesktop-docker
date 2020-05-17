@@ -12,7 +12,7 @@ USER=`whoami` # Cannot do this inline in a sudo command, will return root instea
 echo 'Building image, this might take a while...'
 sudo docker build -t kalidesktop kalidesktopdocker/
 
-unset $USER # We no longer need the variable
+unset USER # We no longer need the variable
 
 echo 'Finished building! Running kali and waiting...'
 sudo docker run -d --network host --privileged -v $HOME:/home/$USER kalidesktop # | grep Progress &
@@ -23,9 +23,7 @@ select CHOICE in vpn novpn none ; do
 
   case $CHOICE in
     vpn)
-        echo 'Ensuring xtigervnc is installed...'
-	sudo apt-get update &>/dev/null && sudo apt-get install tigervnc-viewer --show-progress | grep Progress
-	xtigervncviewer 127.0.0.1:5900 &>/dev/null &
+	(command -v xtigervncviewer &>/dev/null && xtigervncviewer 127.0.0.1:5900 &>/dev/null & ) || (echo 'xtigervnc not found... Installing...'; sudo apt-get update &>/dev/null && sudo apt-get install tigervnc-viewer --show-progress | grep Progress && xtigervncviewer 127.0.0.1:5900 &>/dev/null ) || echo 'Failed to install/run xtigervncviewer... Please point your favourite VNC viewer at localhost:5900' &
         ;;
     novpn)
 	echo 'Opening your default browser...'
