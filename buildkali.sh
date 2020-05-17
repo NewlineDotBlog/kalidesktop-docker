@@ -10,13 +10,13 @@ USER=`whoami` # Cannot do this inline in a sudo command, will return root instea
 # --mount source=kalivol,target=/ \
 
 echo 'Building image, this might take a while...'
-sudo docker build -t kalidesktop kalidesktopdocker/ | grep -E 'Progress|Step' # Print out only progress information
-
-unset USER # We no longer need the variable
+sudo docker build -t kalidesktop kalidesktopdocker/  # | grep -E 'Progress|Step' # Print out only progress information
 
 echo 'Finished building! Running kali and waiting...'
 sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop # | grep Progress &
 sleep 30
+
+unset USER
 
 echo 'How do you want to connect?'
 select CHOICE in vnc novnc none ; do
