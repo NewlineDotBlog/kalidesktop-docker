@@ -9,7 +9,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y \
         curl \
 	sudo \
-	openbox \
 	net-tools \
 	apt-transport-https \
 	gnupg \
@@ -40,8 +39,6 @@ RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
     cd /root
 
 RUN echo
-
-RUN /root/post.sh &
 
 CMD /root/startup.sh
 
