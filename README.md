@@ -14,4 +14,10 @@ This docker image was made to have the following features:
 * Shared home folder (host folder becomes available in the docker image)
 * Persistent folder for special programs (/opt will remain persistent for programs such as burpsuite that don't play well with repeated rebuilding)
 * Startup script that can do post build actions such as installing additional programs and modifying settings.
+* Full ports access for ease of use
+* Full docker access for docker in docker support
 
+### WARNING
+
+As can be read above, the machine has full access to your home folder by default. Furthermore, the container runs with a lot of privileges by default.
+I am not responsible for any deleted home directories by a missed 'rm -rf /' in  an exploit you ran. Use with care.
