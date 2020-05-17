@@ -10,12 +10,12 @@ USER=`whoami` # Cannot do this inline in a sudo command, will return root instea
 # --mount source=kalivol,target=/ \
 
 echo 'Building image, this might take a while...'
-sudo docker build -t kalidesktop kalidesktopdocker/
+sudo docker build -t kalidesktop kalidesktopdocker/ | grep -E 'Progress|Step' # Print out only progress information
 
 unset USER # We no longer need the variable
 
 echo 'Finished building! Running kali and waiting...'
-sudo docker run -d --network host --privileged -v $HOME:/home/$USER kalidesktop # | grep Progress &
+sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop # | grep Progress &
 sleep 30
 
 echo 'How do you want to connect?'
@@ -23,7 +23,7 @@ select CHOICE in vpn novpn none ; do
 
   case $CHOICE in
     vpn)
-	(command -v xtigervncviewer &>/dev/null && xtigervncviewer 127.0.0.1:5900 &>/dev/null & ) || (echo 'xtigervnc not found... Installing...'; sudo apt-get update &>/dev/null && sudo apt-get install tigervnc-viewer --show-progress | grep Progress && xtigervncviewer 127.0.0.1:5900 &>/dev/null ) || echo 'Failed to install/run xtigervncviewer... Please point your favourite VNC viewer at localhost:5900' &
+	(command -v xtigervncviewer &>/dev/null && xtigervncviewer 127.0.0.1:5900 -Fullscreen &>/dev/null & ) || (echo 'xtigervnc not found... Installing...'; sudo apt-get update &>/dev/null && sudo apt-get install tigervnc-viewer --show-progress | grep Progress && xtigervncviewer 127.0.0.1:5900 -Fullscreen &>/dev/null ) || echo 'Failed to install/run xtigervncviewer... Please point your favourite VNC viewer at localhost:5900' &
         ;;
     novpn)
 	echo 'Opening your default browser...'
