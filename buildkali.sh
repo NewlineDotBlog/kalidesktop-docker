@@ -3,7 +3,7 @@
 echo 'Creating volume...'
 sudo docker volume create kalivol
 
-# Side not, we're using the 'whoami' command instead of leveraging the $HOME variable to ensure
+# Side not, we're using the "whoami" command instead of leveraging the $HOME variable to ensure
 # we don't clash with any weird home directories in the kali machine
 USER=`whoami` # Cannot do this inline in a sudo command, will return root instead
 
