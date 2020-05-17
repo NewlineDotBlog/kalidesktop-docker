@@ -1,0 +1,16 @@
+FROM kalilinux/kali-rolling
+ENV DISPLAY :1
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    echo 'Installing updates...' && \
+    apt-get install -y \
+        curl sudo apt-transport-https gnupg \
+        x11vnc xvfb novnc dbus-x11 x11-xkb-utils \
+        kali-defaults kali-desktop-kde \
+	--show-progress -qq && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir ~/.vnc && \
+    x11vnc -storepasswd admin ~/.vnc/passwd
+RUN    x11vnc &
+EXPOSE 5900/tcp 6080/tcp
