@@ -3,6 +3,10 @@ ENV DISPLAY :1
 ADD startup.sh /root/startup.sh
 ADD post.sh /root/post.sh
 RUN chmod 0755 /root/startup.sh
+
+# These are the base files we need to function
+# It is recommended you do not change these so you can reuse the docker cache
+
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     echo 'Installing updates...' && \
