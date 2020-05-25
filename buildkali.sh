@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 echo 'Creating volume...'
 sudo docker volume create kalivol
