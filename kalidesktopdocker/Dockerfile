@@ -18,7 +18,7 @@ cd /root/noVNC && ln -s vnc_auto.html index.html && ./utils/launch.sh --vnc loca
 # Add the post script, any commands added here will run every time the container launches. Useful to automatically run default tools.
 
 RUN echo "#!/bin/bash \n\
-burpsuite &>/root/log & \n" >/root/post.sh
+java -jar \`which burpsuite\` & &>/root/log & \n" >/root/post.sh
 
 RUN chmod 0755 /root/startup.sh
 
@@ -59,7 +59,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 RUN apt-get dist-upgrade -y --show-progress
 
-# Cloning the noVNC and websockify gits. Boooooo bitch. to run novnc.
+# Cloning the noVNC and websockify git repositories. Required to run novnc.
 
 RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
     cd noVNC/utils && git clone https://github.com/kanaka/websockify websockify && \
@@ -69,7 +69,9 @@ RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
 
 RUN echo 'Installing additional packages...' && \
 	apt-get update && \
-	apt-get install burpsuite seclists \
+	apt-get install \
+	burpsuite \
+	seclists \
 	-y --show-progress | grep 'Progress' && \
 	mkdir /usr/share/wordlists && \
 	ln -s /usr/share/seclists /usr/share/wordlists/seclists && \

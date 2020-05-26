@@ -3,7 +3,21 @@ Running kali linux from docker. Complete with (no)VNC gui and persistances.
 
 WIP, clone/use at your own risk!
 
-## Usage and features
+## Quick usage
+
+To use this without the build script or the git repository, build and run as follows:
+
+```
+docker volume create kalivol
+docker build -t kalidesktop newlinedotblog/kalidesktop:latest
+docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop
+```
+
+Be warned, running the last command will give the container full rights over your network devices and ports.
+
+Then, you can connect to http://localhost:6080/vnc.html to connect to noVNC or connect to localhost:5900 with your vnc client.
+
+## Features
 
 I created this dockerfile and configuration because as far as I could find none existed yet that used the most recent kali docker image.
 Furthermore, I wanted to automate the whole usage of docker to a single script that would start or rebuild a fresh install of kali with a single command.
