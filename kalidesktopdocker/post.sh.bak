@@ -1,3 +1,0 @@
-# Commands to run whenever the container is launched.
-# You can use this script to automatically launch your favorite tools upon launch.
-burpsuite &>/root/log &
