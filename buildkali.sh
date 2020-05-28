@@ -19,7 +19,7 @@ sleep 30
 unset USER
 
 echo 'How do you want to connect?'
-select CHOICE in vnc novnc none ; do
+select CHOICE in vnc novnc ssh none ; do
 
   case $CHOICE in
     vnc)
@@ -28,6 +28,10 @@ select CHOICE in vnc novnc none ; do
     novnc)
 	echo 'Opening your default browser...'
 	xdg-open http://127.0.0.1:6080/vnc.html &
+        ;;
+    ssh)
+	echo 'Open a root shell with the following command, password "toor"'
+	echo 'ssh root@localhost -p 22000 -X'
         ;;
     none)
         ;;
