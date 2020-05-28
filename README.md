@@ -15,7 +15,7 @@ docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=ka
 
 Be warned, running the last command will give the container full rights over your network devices and ports.
 
-Then, you can connect to http://localhost:6080/vnc.html to connect to noVNC or connect to localhost:5900 with your vnc client.
+Then, you can connect to http://localhost:6080/vnc.html to connect to noVNC or connect to localhost:5900 with your vnc client. Alternatively, you can connect to ssh at port 22000 with user `root`, password `toor`.
 
 ## Features
 
@@ -48,3 +48,9 @@ How to build:
 
 As can be read above, the machine has full access to your home folder by default. Furthermore, the container runs with a lot of privileges by default.
 I am not responsible for any deleted home directories by a missed 'rm -rf /' in  an exploit you ran. Use with care.
+
+## Known issues
+
+* Burpsuite does not work over VNC
+
+Known issue, currently no known fix available (to my knowledge). **Workaround:** use x11 over ssh to run burpsuite. `ssh root@localhost -p 22000 -X`, then run burpsuite.
