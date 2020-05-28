@@ -31,7 +31,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	kali-tools-top10 \
 	nano \
 	ssh \
-	--show-progress | grep 'Progress' && \
+	--show-progress && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir ~/.vnc && \
@@ -55,7 +55,7 @@ RUN echo 'Installing additional packages...' && \
 	apt-get update && \
 	apt-get install \
 	seclists \
-	-y --show-progress | grep 'Progress' && \
+	-y --show-progress && \
 	mkdir /usr/share/wordlists && \
 	ln -s /usr/share/seclists /usr/share/wordlists/seclists && \
 	ln -s /usr/share/wordlists /root/wordlists
