@@ -18,7 +18,7 @@ cd /root/noVNC && ln -s vnc_auto.html index.html && ./utils/launch.sh --vnc loca
 # Add the post script, any commands added here will run every time the container launches. Useful to automatically run default tools.
 
 RUN echo "#!/bin/bash \n\
-java -jar \`which burpsuite\` & &>/root/log & \n" >/root/post.sh
+\#java -jar \`which burpsuite\` & &>/root/log & \n" >/root/post.sh
 
 RUN chmod 0755 /root/startup.sh
 
@@ -49,6 +49,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	git \
 	menu \
 	unzip \
+	kali-tools-top10 \
+	nano \
+	ssh \
 	--show-progress | grep 'Progress' && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -65,12 +68,17 @@ RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
     cd noVNC/utils && git clone https://github.com/kanaka/websockify websockify && \
     cd /root
 
+# Set up SSH
+
+RUN echo "Port 22000\nPermitRootLogin yes" >> /etc/ssh/sshd_config && \
+	echo "toor" | passwd --stdin root && \
+	service ssh restart
+
 # Add any personal modifications to the docker here
 
 RUN echo 'Installing additional packages...' && \
 	apt-get update && \
 	apt-get install \
-	burpsuite \
 	seclists \
 	-y --show-progress | grep 'Progress' && \
 	mkdir /usr/share/wordlists && \
@@ -79,4 +87,4 @@ RUN echo 'Installing additional packages...' && \
 
 CMD /root/startup.sh
 
-EXPOSE 5900/tcp 6080/tcp
+EXPOSE 5900/tcp 6080/tcp 22000/tcp
