@@ -27,7 +27,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         x11vnc \
 	python-numpy \
 	xvfb \
-	geany \
 	novnc \
 	dbus-x11 \
 	python \
@@ -61,10 +60,9 @@ RUN echo "Port 22000\nPermitRootLogin yes" >> /etc/ssh/sshd_config && \
 RUN echo 'Installing additional packages...' && \
 	apt-get update && \
 	apt-get install \
-	seclists \
+	curl \
 	-y --show-progress && \
 	mkdir /usr/share/wordlists && \
-	ln -s /usr/share/seclists /usr/share/wordlists/seclists && \
 	ln -s /usr/share/wordlists /root/wordlists
 
 # Add the startup script
