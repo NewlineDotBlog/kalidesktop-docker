@@ -6,6 +6,17 @@ ENV DISPLAY :1
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
+    echo 'Installing desktop files, this may take a few minutes...' && \
+    apt-get install -y \
+	kali-defaults \
+        desktop-base \
+        kali-desktop-kde \
+        kde-plasma-desktop \
+        --show-progress
+
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
     echo 'Installing base files, this may take a few minutes...' && \
     apt-get install -y \
         curl \
@@ -21,10 +32,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	dbus-x11 \
 	python \
 	x11-xkb-utils \
-        kali-defaults \
-	desktop-base \
-	kali-desktop-kde \
-	kde-plasma-desktop \
 	git \
 	menu \
 	unzip \
