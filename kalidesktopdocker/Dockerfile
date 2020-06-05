@@ -34,7 +34,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	git \
 	menu \
 	unzip \
-	kali-tools-top10 \
 	nano \
 	ssh \
 	--show-progress && \
@@ -59,7 +58,7 @@ RUN echo "Port 22000\nPermitRootLogin yes" >> /etc/ssh/sshd_config && \
 RUN echo 'Installing additional packages...' && \
 	apt-get update && \
 	apt-get install \
-	curl \
+	kali-tools-top10 \
 	-y --show-progress && \
 	mkdir /usr/share/wordlists && \
 	ln -s /usr/share/wordlists /root/wordlists
