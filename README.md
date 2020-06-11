@@ -35,7 +35,7 @@ Note the following design decisions when making changes or adding self made post
 
 * `/root/` is non persistent custom files and folders. These are meant only for the kali machine such as symbolic links etc.
 * `/home/$USER` is the persistent home folder of the host machine.
-* `/opt/vol/` is a persistent programs and files. Should be used for weird installations and configurations. Separate volumes can be attached in `/opt/` as well.
+* `/opt/vol/` is a volume for persistent programs and files. Should be used for weird installations and configurations. Separate volumes can be attached in `/opt/` as well.
 
 How to build:
 
