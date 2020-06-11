@@ -56,6 +56,7 @@ RUN echo "Port 22000\nPermitRootLogin yes" >> /etc/ssh/sshd_config && \
 # Add any personal modifications to the docker here TODO: Add DEBIAN_FRONTEND=noninteractive here 
 
 RUN echo 'Installing additional packages...' && \
+	export DEBIAN_FRONTEND=noninteractive && \
 	apt-get update && \
 	apt-get install \
 	kali-tools-top10 \
