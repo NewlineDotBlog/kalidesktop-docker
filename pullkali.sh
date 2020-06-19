@@ -10,17 +10,17 @@ echo 'Tagging the base image'
 sudo docker image tag newlinedotblog/kalidesktop kalidesktop-base
 
 echo 'Starting the base container...'
-sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop-base
+contname=`sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop-base`
 sleep 5
 
 echo 'Running personal modifications'
-sudo docker exec -it kalidesktop-base /bin/bash -c 'apt-get update && apt-get install nmap'
+sudo docker exec -it $contname /bin/bash -c 'apt-get update && apt-get install nmap'
 
 echo 'Committing changes'
-sudo docker commit kalidesktop-base kalidesktop
+sudo docker commit $contname kalidesktop
 
 echo 'Stopping base container'
-sudo docker stop kalidesktop-base
+sudo docker stop $contname
 
 echo 'Starting personalized container'
 sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop
