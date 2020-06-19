@@ -9,8 +9,14 @@ To use this without the build script or the git repository, build and run as fol
 
 ```
 docker volume create kalivol
-docker build -t kalidesktop newlinedotblog/kalidesktop:latest
-docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop
+docker pull newlinedotblog/kalidesktop:latest
+docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ newlinedotblog/kalidesktop
+```
+
+Alternatively, run with limited access to the host system. This is useful when you want the container to manage its own network interfaces (with IE its own VPN connection):
+
+```
+docker run -d -p 5900:5900 -p 6080:6080 -p 22000:22000 --privileged newlinedotblog/kalidesktop
 ```
 
 Be warned, running the last command will give the container full rights over your network devices and ports.
