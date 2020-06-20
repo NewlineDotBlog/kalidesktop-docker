@@ -60,3 +60,8 @@ I am not responsible for any deleted home directories by a missed 'rm -rf /' in 
 * Burpsuite does not work over VNC
 
 Known issue, currently no known fix available (to my knowledge). **Workaround:** use x11 over ssh to run burpsuite. `ssh root@localhost -p 22000 -X`, then run burpsuite.
+
+## Notes for developers
+
+* If you want to implement a different GUI instead of KDE-Plasma, you have to replace both the package `kali-desktop-kde` and `kde-plasma-desktop` with their counterparts for the GUI you're trying to implement. Furthermore, you'd also have to replace the `plasmashell` command in the startup script with your GUI's equivalent of the same command.
+* Feel free to copy, reuse and modify any code you find here. A link back to me would be appreciated but is not required. 
