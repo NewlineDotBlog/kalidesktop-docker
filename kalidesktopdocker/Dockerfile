@@ -45,7 +45,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 # Cloning the noVNC and websockify git repositories. Required to run novnc.
 
 RUN cd /root && git clone https://github.com/kanaka/noVNC.git && \
-    cd noVNC/utils && git clone https://github.com/kanaka/websockify websockify
+    cd noVNC/utils && git clone https://github.com/kanaka/websockify websockify && \
+    ln -s /root/noVNC/vnc_auto.html /root/noVNC/index.html
 
 # Set up SSH
 
@@ -67,6 +68,7 @@ RUN echo 'Installing additional packages...' && \
 # Add the startup script
 
 RUN echo "#!/bin/bash \n\
+[ -e /tmp/.X1-lock ] && rm -rf /tmp/.X1-lock \n\
 export DISPLAY=:1 \n\
 Xvfb :1 -screen 0 1920x1080x16 & \n\
 sleep 5 \n\
@@ -77,7 +79,7 @@ service ssh start \n\
 chmod +x /root/post.sh \n\
 /root/post.sh &>/dev/null & \n\
 x11vnc -display :1 -nopw -listen localhost -xkb -forever & # -ncache 10 -ncache_cr can be added for performance. Might give issues with some vnc viewers \n\
-cd /root/noVNC && ln -s vnc_auto.html index.html && ./utils/launch.sh --vnc localhost:5900 \n" >/root/startup.sh
+cd /root/noVNC && ./utils/launch.sh --vnc localhost:5900 \n" >/root/startup.sh
 
 # Add the post script, any commands added here will run every time the container launches. Useful to automatically run default tools.
 

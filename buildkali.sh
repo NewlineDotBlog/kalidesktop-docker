@@ -21,7 +21,7 @@ select CHOICE in vnc novnc ssh none ; do
   case $CHOICE in
     vnc)
 	echo 'Opening your default vnc viewer'
-	xdg-open vnc://localhost:5900 & || echo 'Opening vnc viewer failed. Please install a vnc viewer and connect to localhost:5900'
+	xdg-open vnc://localhost:5900 || echo 'Opening vnc viewer failed. Please install a vnc viewer and connect to localhost:5900' &
         ;;
     novnc)
 	echo 'Opening your default browser...'
