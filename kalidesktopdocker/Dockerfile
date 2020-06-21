@@ -54,7 +54,7 @@ RUN echo "Port 22000\nPermitRootLogin yes" >> /etc/ssh/sshd_config && \
 	echo "root:toor" | chpasswd && \
 	service ssh restart
 
-# Add any personal modifications to the docker here TODO: Add DEBIAN_FRONTEND=noninteractive here 
+# Add any personal modifications to the docker here 
 
 RUN echo 'Installing additional packages...' && \
 	export DEBIAN_FRONTEND=noninteractive && \
