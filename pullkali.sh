@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# This script is meant for pulling the image from dockerhub. This is recommended to get started as fast as possible.
+mods='export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install nmap -y'
 
-# Add any personal modifications here.
-# After setting up the base image, this will be applied and committed to a new image
-# This way, you can download the prebuilt image from dockerhub, yet apply any personal modifications to the image
-# that will be stored in a new reusable image.
-# Use '&&' or ';' for separate commands.
-mods='export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install nmap'
+echo 'Stopping any still running kalidesktop containers'
+for i in `sudo docker ps | grep 'kalidesktop' | cut -d ' ' -f1`; do sudo docker stop $i;done
+
+echo 'Removing any kalidesktop containers'
+for i in `sudo docker ps -a | grep 'kalidesktop' | cut -d ' ' -f1`; do sudo docker rm $i;done
+
+echo 'Removing old kalidesktop image'
+sudo docker rmi kalidesktop || echo 'None yet existed'
 
 echo 'Pulling the latest image from dockerhub, this might take a few minutes...'
 sudo docker pull newlinedotblog/kalidesktop
