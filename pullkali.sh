@@ -36,7 +36,7 @@ unset mods
 unset contname
 
 echo 'Starting personalized container'
-sudo docker run --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop
+sudo docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ kalidesktop
 sleep 5
 
 echo 'How do you want to connect?'
