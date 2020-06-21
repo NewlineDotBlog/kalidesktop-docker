@@ -1,9 +1,9 @@
 # kalidesktop-docker
 Running kali linux from docker. Complete with (no)VNC gui and persistances.
 
-Indepth blog about how this all functions on https://newline.blog soon.
+Indepth blog about how this all functions on https://newline.blog/posts/kalidesktopdocker/ .
 
-WIP, clone/use at your own risk!
+Clone/use at your own risk!
 
 ## Quick usage
 
