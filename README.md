@@ -1,9 +1,13 @@
 # kalidesktop-docker
 Running kali linux from docker. Complete with (no)VNC gui and persistances.
 
+Indepth blog about how this all functions on https://newline.blog soon.
+
 WIP, clone/use at your own risk!
 
 ## Quick usage
+
+The easiest way to get started is with the `pullkali.sh` script in the [repository](https://github.com/NewlineDotBlog/kalidesktop-docker). This scripts allows you to get started as fast as possible and will allow you to make additional personal changes to your image.
 
 To use this without the build script or the git repository, build and run as follows:
 
@@ -12,11 +16,12 @@ docker volume create kalivol
 docker pull newlinedotblog/kalidesktop:latest
 docker run -d --network host --privileged -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ newlinedotblog/kalidesktop
 ```
+Running the above will give you the base image with [`kali-tools-top10`](https://tools.kali.org/kali-metapackages) installed.
 
 Alternatively, run with limited access to the host system. This is useful when you want the container to manage its own network interfaces (with IE its own VPN connection):
 
 ```
-docker run -d -p 5900:5900 -p 6080:6080 -p 22000:22000 --privileged newlinedotblog/kalidesktop
+docker run -d -p 5900:5900 -p 6080:6080 -p 22000:22000 -v $HOME:/home/$USER --mount source=kalivol,target=/opt/vol/ --privileged newlinedotblog/kalidesktop
 ```
 
 Be warned, running the last command will give the container full rights over your network devices and ports.
