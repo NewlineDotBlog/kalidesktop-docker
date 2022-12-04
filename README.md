@@ -1,3 +1,9 @@
+# Quick warning
+
+This was an experiment to see if kali could be run in a docker environment. It is likely unsafe and outdated and should not be used in production environments!
+
+For a way better and more modern implementation of this idea please see [Exegol](https://github.com/ThePorgs/Exegol).
+
 # kalidesktop-docker
 Running kali linux from docker. Complete with (no)VNC gui and persistances.
 
